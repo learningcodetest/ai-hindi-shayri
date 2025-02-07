@@ -1,61 +1,67 @@
-// Helper function: Return a random element from an array.
+// Helper function to get a random element from an array
 function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-// Arrays for AI-generated shayri parts
-const subjects = ["Ishq", "Dil", "Zindagi", "Raat", "Khamoshi", "Sapna", "Yaadon", "Mohabbat"];
-const objects = ["armaan", "dariya", "safar", "andheron", "rang", "jashn", "geet", "kahani"];
-const emotions = ["bekaraar", "mehfooz", "aashiqana", "tanha", "roshan"];
-const modifiers = ["jhilmilata", "dhundhla", "ubhar gaya", "phir se chamka", "mehsoos hua"];
-const verbs = ["beh gaye", "ruk gaye", "toot gaye", "bikhre", "chhalak gaye"];
+// Word arrays for dynamic shayri generation
+const subjects    = ["Ishq", "Dil", "Zindagi", "Raat", "Khamoshi", "Sapna", "Yaadon", "Mohabbat", "Tanhai"];
+const adjectives  = ["bekaraar", "mehfooz", "aashiqana", "tanha", "roshan", "dhundhla", "mohabbat bhara"];
+const verbs       = ["beh gaye", "ruk gaye", "toot gaye", "bikhre", "chhalak gaye", "chamak uthe"];
+const nouns       = ["armaan", "dariya", "safar", "andheron", "rang", "jashn", "geet", "kahani"];
+const modifiers   = ["jhilmilata", "ubhar gaya", "phir se chamka", "mehsoos hua", "mahka", "khil utha"];
 
-// Template options for two-line shayris
+// Template definitions for two-line shayri generation
 const templates = [
   {
-    line1: "{subject} ke {object} mein {emotion}",
-    line2: "phir bhi, dil ne {verb} aur {modifier} ho gaya"
+    line1: "{subject} ke {noun} mein {adjective} sapne {verb}",
+    line2: "aur dil ne {modifier} ehsaas se jeena sikha"
   },
   {
-    line1: "{subject} ne {object} ko {verb} kar,",
-    line2: "dil mein {modifier} {emotion} bhar diya"
+    line1: "Jab {subject} ne {noun} ko {verb},",
+    line2: "to har lamha hua {modifier} aur {adjective}"
   },
   {
-    line1: "Jab {subject} {verb},",
-    line2: "to {object} ho gaya {modifier}"
+    line1: "{subject} ka {noun} hai, {adjective} sa,",
+    line2: "har pal {verb} aur {modifier} sa"
+  },
+  {
+    line1: "Kahani hai {subject} ki,",
+    line2: "{noun} ne dil ko {modifier} tarana di"
   }
 ];
 
-// Function to generate an AI-style shayri using a random template and word substitutions
+// Function to generate an AI-style shayri by selecting a random template and substituting placeholders
 function generateAIShayri() {
   const template = random(templates);
-  const line1 = template.line1
+  
+  // Replace placeholders for line 1
+  let line1 = template.line1
     .replace("{subject}", random(subjects))
-    .replace("{object}", random(objects))
-    .replace("{emotion}", random(emotions))
-    .replace("{modifier}", random(modifiers))
+    .replace("{noun}", random(nouns))
+    .replace("{adjective}", random(adjectives))
     .replace("{verb}", random(verbs));
-    
-  const line2 = template.line2
-    .replace("{subject}", random(subjects))
-    .replace("{object}", random(objects))
-    .replace("{emotion}", random(emotions))
+  
+  // Replace placeholders for line 2
+  let line2 = template.line2
     .replace("{modifier}", random(modifiers))
-    .replace("{verb}", random(verbs));
-    
+    .replace("{noun}", random(nouns))
+    .replace("{adjective}", random(adjectives))
+    .replace("{verb}", random(verbs))
+    .replace("{subject}", random(subjects));
+  
   return line1 + "<br>" + line2;
 }
 
-// Function to display the generated shayri in the container
+// Function to display the generated shayri
 function displayShayri() {
   const shayriContainer = document.getElementById('shayri');
   shayriContainer.innerHTML = generateAIShayri();
 }
 
-// Shuffle button functionality: generate a new shayri on click
+// Shuffle button: generate a new shayri on click
 document.getElementById('shuffleBtn').addEventListener('click', displayShayri);
 
-// Share button functionality: use the Web Share API if available; otherwise, copy to clipboard
+// Share button: use the Web Share API if available; otherwise copy to clipboard
 document.getElementById('shareBtn').addEventListener('click', function() {
   const textToShare = document.getElementById('shayri').innerText;
   if (navigator.share) {
@@ -65,7 +71,6 @@ document.getElementById('shareBtn').addEventListener('click', function() {
       url: window.location.href
     }).catch((error) => console.log('Error sharing', error));
   } else {
-    // Fallback: copy the shayri text to clipboard
     navigator.clipboard.writeText(textToShare).then(() => {
       alert('Shayri copied to clipboard!');
     }, (err) => {
