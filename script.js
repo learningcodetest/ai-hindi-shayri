@@ -1,4 +1,4 @@
-// Helper function to get a random element from an array
+// Helper function: Returns a random element from an array
 function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -30,18 +30,18 @@ const templates = [
   }
 ];
 
-// Function to generate an AI-style shayri by selecting a random template and substituting placeholders
+// Function to generate a fully AI-style shayri (template-based random generation)
 function generateAIShayri() {
   const template = random(templates);
   
-  // Replace placeholders for line 1
+  // Replace placeholders in line 1
   let line1 = template.line1
     .replace("{subject}", random(subjects))
     .replace("{noun}", random(nouns))
     .replace("{adjective}", random(adjectives))
     .replace("{verb}", random(verbs));
   
-  // Replace placeholders for line 2
+  // Replace placeholders in line 2
   let line2 = template.line2
     .replace("{modifier}", random(modifiers))
     .replace("{noun}", random(nouns))
@@ -52,16 +52,16 @@ function generateAIShayri() {
   return line1 + "<br>" + line2;
 }
 
-// Function to display the generated shayri
+// Function to display the generated shayri in the container
 function displayShayri() {
   const shayriContainer = document.getElementById('shayri');
   shayriContainer.innerHTML = generateAIShayri();
 }
 
-// Shuffle button: generate a new shayri on click
+// Shuffle button: Generate a new shayri on click
 document.getElementById('shuffleBtn').addEventListener('click', displayShayri);
 
-// Share button: use the Web Share API if available; otherwise copy to clipboard
+// Share button: Use Web Share API if available; otherwise copy to clipboard
 document.getElementById('shareBtn').addEventListener('click', function() {
   const textToShare = document.getElementById('shayri').innerText;
   if (navigator.share) {
