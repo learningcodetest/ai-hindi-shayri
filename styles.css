@@ -30,7 +30,7 @@ body {
 
 /* Shayri Container: large font, centered, with a gentle floating animation */
 .shayri-container {
-  font-size: 4em;
+  font-size: 4em; /* Large font size */
   line-height: 1.4;
   margin-bottom: 40px;
   animation: float 10s ease-in-out infinite;
