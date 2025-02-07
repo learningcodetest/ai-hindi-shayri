@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Essential for responsiveness on mobile/iOS devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Generated Hindi Shayri</title>
   
@@ -12,25 +13,30 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Background Blurry Orbs -->
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-  <div class="orb orb4"></div>
-  
-  <!-- Shayri Text Container -->
-  <div class="shayri-container" id="shayri">
-    <!-- AI generated shayri will appear here -->
+  <!-- Background orbs container -->
+  <div class="orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="orb orb4"></div>
   </div>
-  
-  <!-- Buttons: Shuffle & Share -->
-  <div class="button-container">
-    <button id="shuffleBtn">Shuffle</button>
-    <button id="shareBtn">Share</button>
+
+  <!-- Main content container (centered using Flexbox) -->
+  <div class="content">
+    <!-- Shayri Container -->
+    <div class="shayri-container" id="shayri">
+      <!-- AI generated shayri will appear here -->
+    </div>
+    
+    <!-- Buttons: Shuffle & Share -->
+    <div class="button-container">
+      <button id="shuffleBtn">Shuffle</button>
+      <button id="shareBtn">Share</button>
+    </div>
   </div>
   
   <!-- Background Jazz Music -->
-  <!-- Replace 'your_jazz_music.mp3' with the URL or relative path to your music file -->
+  <!-- Replace 'your_jazz_music.mp3' with the path/URL of your audio file -->
   <audio id="bg-music" autoplay loop>
     <source src="your_jazz_music.mp3" type="audio/mp3">
     Your browser does not support the audio element.
